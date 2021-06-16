@@ -138,6 +138,7 @@ class PyTorchTrainDataset(Dataset):
 			self.rig_mean[r] = self.freqRel[r] / len(self.t_of_r[r])
 
 	def __corrupt_head(self, t, r, num_max = 1):
+		print("\n\nCorrupt Head: ", t,r)
 		tmp = torch.randint(low = 0, high = self.ent_total, size = (num_max, )).numpy()
 		if not self.filter_flag:
 			return tmp
