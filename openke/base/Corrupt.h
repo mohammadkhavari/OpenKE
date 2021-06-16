@@ -6,6 +6,9 @@
 
 INT corrupt_head(INT id, INT h, INT r, bool filter_flag = true) {
 	INT lef, rig, mid, ll, rr;
+	printf("%d", id);
+	printf("%s","\n\n\n\n\nCorrupt head cpp: \n\n\n\n\n\n\n");
+	
 	if (not filter_flag) {
 		INT tmp = rand_max(id, entityTotal - 1);
 		if (tmp < h)
