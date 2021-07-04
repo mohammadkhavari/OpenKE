@@ -3,10 +3,11 @@ from openke.config import Trainer, Tester
 from openke.module.model import DistMult
 from openke.module.loss import SoftplusLoss
 from openke.module.strategy import NegativeSampling
-from openke.data import TrainDataLoader, TestDataLoader
+from openke.data import PyTorchTrainDataLoader, TestDataLoader
+
 
 # dataloader for training
-train_dataloader = TrainDataLoader(
+train_dataloader = PyTorchTrainDataLoader(
 	in_path = "./benchmarks/WN18RR/", 
 	nbatches = 100,
 	threads = 8, 
