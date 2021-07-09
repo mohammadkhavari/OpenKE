@@ -163,7 +163,7 @@ class PyTorchTrainDataset(Dataset):
 			if t >= cl["low"] and t < cl["high"]:
 				head_class = cl
 
-		print("\n\n Choosen class is: ", cl)
+		print("\n\n Choosen class is: ", cl, t)
 
 		# now we choose the corrupted head randomly from the choosen class
 		tmp = torch.randint(low = cl["low"], high = cl["high"], size = (num_max, )).numpy()
