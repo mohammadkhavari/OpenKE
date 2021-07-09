@@ -139,7 +139,35 @@ class PyTorchTrainDataset(Dataset):
 
 	def __corrupt_head(self, t, r, num_max = 1):
 		print("\n\nCorrupt Head: ", t,r)
-		tmp = torch.randint(low = 0, high = self.ent_total, size = (num_max, )).numpy()
+		
+		# Here we define 3 classes of data 
+		def create_class(low, high):
+			return {
+				"low": low,
+				"high": high}
+			
+		# class = (low_index, high_index)
+
+		# Class1:[0:ent_total/3] 
+		class1 = create_class(0, self.ent_total/3)
+
+		# Class2:[ent_total/3:2*ent_total/3] 
+		class2 = create_class(self.ent_total/3, 2*self.ent_total/3)
+
+		# Class3:[2*ent_total/3:] 
+		class3 = create_class(2*self.ent_total/3, self.ent_total)
+
+		# And we choose a class that contains tail, default class is class1
+		head_class = class1
+		for cl in [class1, class2, class3]:
+			if t >= cl["low"] and t < cl["high"]:
+				head_class = cl
+
+		print("\n\n Choosen class is: ", cl)
+
+		# now we choose the corrupted head randomly from the choosen class
+		tmp = torch.randint(low = cl["low"], high = cl["high"], size = (num_max, )).numpy()
+
 		if not self.filter_flag:
 			return tmp
 		mask = np.in1d(tmp, self.h_of_tr[(t, r)], assume_unique=True, invert=True)

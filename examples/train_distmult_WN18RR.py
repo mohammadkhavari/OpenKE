@@ -4,6 +4,8 @@ from openke.module.model import DistMult
 from openke.module.loss import SoftplusLoss
 from openke.module.strategy import NegativeSampling
 from openke.data import TrainDataLoader, TestDataLoader
+
+# NOTE: we use pythorch dataloader that is written in python instead of TrainDataLoader written in cpp
 from openke.data.PyTorchTrainDataLoader import PyTorchTrainDataLoader
 
 
@@ -39,6 +41,7 @@ model = NegativeSampling(
 
 
 # train the model
+# NOTE: epochs are too short in order to have faster develope and test they should refactor to normal values
 trainer = Trainer(model = model, data_loader = train_dataloader, train_times = 20, alpha = 0.5, use_gpu = True, opt_method = "adagrad")
 trainer.run()
 distmult.save_checkpoint('./checkpoint/distmult.ckpt')
