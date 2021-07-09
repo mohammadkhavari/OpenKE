@@ -138,7 +138,7 @@ class PyTorchTrainDataset(Dataset):
 			self.rig_mean[r] = self.freqRel[r] / len(self.t_of_r[r])
 
 	def __corrupt_head(self, t, r, num_max = 1):
-		print("\n\nCorrupt Head: ", t,r)
+		# print("\n\nCorrupt Head: ", t,r)لهف
 		
 		# Here we define 3 classes of data 
 		def create_class(low, high):
@@ -163,7 +163,7 @@ class PyTorchTrainDataset(Dataset):
 			if t >= cl["low"] and t < cl["high"]:
 				head_class = cl
 
-		print("\n\n Choosen class is: ", head_class, t)
+		# print("\n\n Choosen class is: ", head_class, t)
 
 		# now we choose the corrupted head randomly from the choosen class
 		tmp = torch.randint(low = head_class["low"], high = head_class["high"], size = (num_max, )).numpy()
