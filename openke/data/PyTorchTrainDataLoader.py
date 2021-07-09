@@ -149,13 +149,13 @@ class PyTorchTrainDataset(Dataset):
 		# class = (low_index, high_index)
 
 		# Class1:[0:ent_total/3] 
-		class1 = create_class(0, self.ent_total/3)
+		class1 = create_class(0, self.ent_total//3)
 
 		# Class2:[ent_total/3:2*ent_total/3] 
-		class2 = create_class(self.ent_total/3, 2*self.ent_total/3)
+		class2 = create_class(self.ent_total//3, 2*self.ent_total//3)
 
 		# Class3:[2*ent_total/3:] 
-		class3 = create_class(2*self.ent_total/3, self.ent_total)
+		class3 = create_class(2*self.ent_total//3, self.ent_total)
 
 		# And we choose a class that contains tail, default class is class1
 		head_class = class1
