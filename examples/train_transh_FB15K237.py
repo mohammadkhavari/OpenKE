@@ -5,8 +5,11 @@ from openke.module.loss import MarginLoss
 from openke.module.strategy import NegativeSampling
 from openke.data import TrainDataLoader, TestDataLoader
 
+# NOTE: we use pythorch dataloader that is written in python instead of TrainDataLoader written in cpp
+from openke.data.PyTorchTrainDataLoader import PyTorchTrainDataLoader
+
 # dataloader for training
-train_dataloader = TrainDataLoader(
+train_dataloader = PyTorchTrainDataLoader(
 	in_path = "./benchmarks/FB15K237/", 
 	nbatches = 100,
 	threads = 8, 
@@ -36,7 +39,8 @@ model = NegativeSampling(
 
 
 # train the model
-trainer = Trainer(model = model, data_loader = train_dataloader, train_times = 1000, alpha = 0.5, use_gpu = True)
+# default train times was 1000 epochs It has reduced to 5
+trainer = Trainer(model = model, data_loader = train_dataloader, train_times = 5, alpha = 0.5, use_gpu = True)
 trainer.run()
 transh.save_checkpoint('./checkpoint/transh.ckpt')
 
